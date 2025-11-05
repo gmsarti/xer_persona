@@ -1,7 +1,51 @@
+[project.urls]
+Repository = "https://github.com/arqgen/dashboard_pu"
+
 [project]
 name = "xer-persona"
 version = "0.1.0"
-description = "Add your description here"
+description = "Playground para pensar em personages criados a partir de IA usando Xerazadi como base."
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+requires-python = "==3.12.*"
+
+dependencies = [
+    "langchain>=1.0.3",
+    "langchain-openai>=1.0.2",
+    "python-dotenv>=1.2.1",
+    "streamlit>=1.51.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "ruff>=0.14.3",
+    "taskipy>=1.14.1",
+]
+
+[tool.ruff]
+line-length = 88
+# extend-exclude = ['migrations']
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    'E', # Errors that could cause exceptions or major functionality issues
+    'F', # Flaws in type annotations
+    'FAST', # FastAPI
+    'FIX', # Reminder tags for TODOs and FIXMEs in the code
+    'I', # Import-related linting issues
+    'W', # Warnings for stylistic or minor programming issues
+    'PL', # PyLint checks, including unused function variables
+    'PT',
+    'UP', # Checks for deprecated Python features that could be upgraded
+    ]
+
+[tool.ruff.format]
+quote-style = 'single'
+indent-style = "space"
+line-ending = "auto"
+
+[tool.taskipy.tasks]
+run = "streamlit run main.py"
+lint = "ruff check ."
+format = "ruff format ."
